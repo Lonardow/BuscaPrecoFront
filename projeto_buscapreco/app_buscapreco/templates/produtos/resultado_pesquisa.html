@@ -1,0 +1,34 @@
+
+{% extends 'produtos/base.html' %}
+{% block conteudo %}
+{% load humanize%}
+<form style='text-align: center;'action='{% url 'resultados' %}' method='POST'>
+    <div> 
+        <h1 style='text-align: center;'>Pesquisar</h1>
+        <input type='text' class='form-control-lg' name='produto' placeholder='Pesquisar...' ></input>
+        <input type='submit' value='🔎' class='form-control-lg'> </input>
+    </div>
+
+</form>
+</br>
+<div class='container'>
+    <table class='table table-light table-strip'>
+        <tr>
+            <th>Produto</th>
+            <th>Nome</th>
+            <th>Preço</th>
+            <th>Site</th>
+            <th>Data Cotação</th>
+        </tr>
+        {% for dado in dados %}
+        <td><img style='max-height: 150px; max-width:150px;' src="{{ dado.link_imagem}}" alt=""></td>
+        <td>{{ dado.nome}}</td>
+        <td>R${{ dado.preco | intcomma}}</td>
+        <td>{{ dado.site}}</td>
+        <td>{{ dado.data_cotacao}}</td>
+
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock%}
